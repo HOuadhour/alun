@@ -30,17 +30,7 @@ class updateNotifier():
     """
     def __init__(self):
         self.updateCmd = "sudo pacman -Syu --noconfirm"
-        self.terminals = {}
-        self.terminals["konsole"] = "konsole -e " + self.updateCmd
-        self.terminals["lxterminal"] = "lxterminal -e " + self.updateCmd
-        self.terminals["gnome-terminal"] = "gnome-terminal -e " + \
-                self.updateCmd
-        self.terminals["xfce4-terminal"] = "xfce4-terminal -e " + \
-                self.updateCmd
-        self.terminals["mate-terminal"] = "mate-terminal -e " + \
-                self.updateCmd
-        self.terminals["terminator"] = "terminator -e " + self.updateCmd
-
+        self.term = self.getCurrentTerm()
     
     def checkUpdate(self):
         cmdOutput = subprocess.run("checkupdates",
@@ -63,20 +53,18 @@ class updateNotifier():
                   .format(message
                   ))
 
-    def startUpdate(self, term):
+    def startUpdate(self):
         print("Start upgrading your os...")
-        os.system(self.terminals[term])
+        cmd = "{} -e {}".format(self.term, self.updateCmd)
+        os.system(cmd)
         self.notifyUser("Your system has been upgraded successfully.")
         quit = input("Press enter to quit ...")
 
     def getCurrentTerm(self):
-        data = open("/opt/ALUN/term", "r").readline().rstrip()
+        data = open("term", "r").readline().rstrip()
         return data
 
-
-
 update = updateNotifier()
-term = update.getCurrentTerm()
 if update.checkUpdate():
-    update.startUpdate(term)
+    update.startUpdate()
 
