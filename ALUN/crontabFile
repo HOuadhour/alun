@@ -1,1 +1,1 @@
-* */2 * * * env DISPLAY=:0 alun
+*/30 * * * * env DISPLAY=:0 /usr/local/bin/alun
