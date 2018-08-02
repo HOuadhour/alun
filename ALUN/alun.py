@@ -61,6 +61,7 @@ class updateNotifier():
     def getCurrentTerm(self):
         data = open("term", "r").readline().rstrip()
         return data
+        data.close()
 
 update = updateNotifier()
 if update.checkUpdate():
