@@ -29,7 +29,7 @@ class updateNotifier():
     Notify the user if so.
     """
     def __init__(self):
-        self.updateCmd = "sudo pacman -Syu --noconfirm"
+        self.updateCmd = "sudo -p 'Type your user password to start the update: ' pacman -Syu --noconfirm"
         self.term = self.getCurrentTerm()
     
     def checkUpdate(self):
@@ -54,10 +54,8 @@ class updateNotifier():
                   ))
 
     def startUpdate(self):
-        print("Start upgrading your os...")
         cmd = "{} -e {}".format(self.term, self.updateCmd)
         os.system(cmd)
-        self.notifyUser("Your system has been upgraded successfully.")
         quit = input("Press enter to quit ...")
 
     def getCurrentTerm(self):
