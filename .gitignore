@@ -25,3 +25,7 @@ roadmap.txt
 
 # add the regenerateUiToPy.sh
 regenerateUiToPy.sh
+
+# add the usr etc directories
+usr/
+etc/
