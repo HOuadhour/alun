@@ -6,45 +6,58 @@
 ALUN is a script written in `python3`, created to help you keep your Arch
 updated.
 
-* ALUN uses `crontab` to autorun the script every 30 minutes.
-* ALUN will automatically open the terminal for you, and all you need is to
-  enter your user password.
+* `alun` uses `crontab` to autorun the script every 30 minutes (default).
+* `alun` will automatically open the terminal for you, and all you need is to
+  enter your password.
 * ALUN uses the native notification to notify you when there is an update.
 * ALUN uses `checkupdates` to check for updates.
-* Default installation path is in `/opt/ALUN`.
+* Default terminal is `konsole`.
+* Default configuration file located inside `/etc/alun/conf.py` 
+
+# Pre-Installation
+* You need to install `git` to clone the repo.
+```bash
+$ sudo pacman -Sy git --needed
+```
 
 # Installation
 The installation process is too simple all you have to do is:
-* Clone or download the current repository.
-* Launch the `install.py` script.
+* Clone the repo.
+* Build the package and install.
 
-## Clone method
+## Cloning the repo
 ```bash
-$ cd /tmp
-$ git clone https://github.com/HOuadhour/ALUN.git
-$ python install.py
+$ git clone https://aur.archlinux.org/alun.git /tmp/alun
 ```
 
+## Building and Installing
+```bash
+$ cd /tmp/alun
+$ makepkg -si
+```
+
+# Post-Installation
+After the installation you may want.
+
+## Changing default terminal
+* Open `/etc/alun/conf.py` with your preferred text editor as root.
+* Change the `terminal` variable to your preferred `terminal`.
+* **Note: Do not change the variable name itself, change `konsole`.**
+
+## Adding crontab (Necessary)
+### Create a new crontab
+* This method will overwrite your old crontab if you alread have one.
+```bash
+$ crontab /etc/alun/crontab
+```
+### Appending to old crontab
+* This method will append the crontab to your old one.
+* You want lose your old crontab.
+```bash
+$ cat /etc/alun/crontab >> /var/spool/cron/$USER
+```
 # Configuration
-No configuration is required, but let's say you want to change the default
-terminal.
-<br />
-Or simply you would like to change the time interval from every 30 minutes to
-another time.
-
-## Changing terminal
-There is a file called `term` inside the installation directory.
-<br />
-Change it to the terminal you like.
-> Change the terminal name inside `term` after the installation.
-
-## Changing time
-Changing the time requires knowledge about `crontab` syntax.
-<br />
-Type the following command inside your terminal.
-```bash
-$ crontab -e
-```
+Currently there is no configuration everything is manual.
 
 # Connect with me
 
