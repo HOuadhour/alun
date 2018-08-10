@@ -29,8 +29,7 @@ class updateNotifier():
     Notify the user if so.
     """
     def __init__(self):
-        self.updateCmd = "sudo -p 'Type your user password to start the update: ' pacman -Syu --noconfirm"
-        self.term = self.getCurrentTerm()
+        self.updateCmd = "sudo -p 'Type your password to start the update: ' pacman -Syu --noconfirm"
     
     def checkUpdate(self):
         cmdOutput = subprocess.run("checkupdates",
@@ -54,14 +53,10 @@ class updateNotifier():
                   ))
 
     def startUpdate(self):
+        import conf
+        self.term = conf.terminal
         cmd = "{} -e {}".format(self.term, self.updateCmd)
         os.system(cmd)
-        quit = input("Press enter to quit ...")
-
-    def getCurrentTerm(self):
-        data = open("term", "r").readline().rstrip()
-        return data
-        data.close()
 
 update = updateNotifier()
 if update.checkUpdate():
