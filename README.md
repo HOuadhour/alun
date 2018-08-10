@@ -19,6 +19,10 @@ updated.
 ```bash
 $ sudo pacman -Sy git --needed
 ```
+* Add the public key for signature verification.
+```bash
+$ gpg --receive-keys 6481A7A3E66A3AA39D0DD7302A60AB408C14BF70
+```
 
 # Installation
 The installation process is too simple all you have to do is:
