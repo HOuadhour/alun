@@ -23,6 +23,7 @@
 
 import os
 import subprocess
+import sys
 
 class updateNotifier():
     """Check if there are updates available.
@@ -55,7 +56,7 @@ class updateNotifier():
     def startUpdate(self):
         # change to the configuration directory
         # only needed in the installation package
-        # os.chdir("/etc/alun")
+        # sys.path.append("/etc/alun/")
         import conf
         self.term = conf.terminal
         cmd = "{} -e {}".format(self.term, self.updateCmd)
